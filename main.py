@@ -48,9 +48,70 @@ def get_user_data():
     print()
 
     user_data = {}
-    user_data["name"] = input("Nome: ")
-    user_data["age"] = input("Idade: ")
-    user_data["email"] = input("Email: ")
+
+    while True:
+        try:
+            dash(40)
+            user_data["name"] = input("Nome: ").strip()
+            dash(40)
+            if user_data["name"] == "":
+                clear()
+                dash(40)
+                raise ValueError("O nome não pode ser vazio.")
+            if not user_data["name"].replace(" ", "").isalpha():
+                clear()
+                dash(40)
+                raise ValueError("O nome deve conter apenas letras.")
+            break
+        except ValueError as e:
+            print(e)
+            sleep(1)
+            clear()
+
+    while True:
+        try:
+            dash(40)
+            age = input("Idade: ").strip()
+            dash(40)
+            if age == "":
+                clear()
+                dash(40)
+                raise ValueError("A idade não pode ser vazia.")
+            if not age.isdigit():
+                clear()
+                dash(40)
+                raise ValueError("A idade deve ser um número inteiro.")
+            age = int(age)
+            if age <= 0:
+                clear()
+                dash(40)
+                raise ValueError("A idade não pode menor que 1.")
+            if age > 120:
+                clear()
+                dash(40)
+                raise ValueError("A idade não pode ser maior que 120.")
+            user_data["age"] = age
+            break
+        except ValueError as e:
+            print(e)
+            sleep(1)
+            clear()
+
+    while True:
+        try:
+            dash(40)
+            user_data["email"] = input("Email: ").strip()
+            dash(40)
+            if "@" not in user_data["email"] or "." not in user_data["email"]:
+                clear()
+                dash(40)
+                raise ValueError("Email inválido.")
+            break
+        except ValueError as e:
+            print(e)
+            sleep(1)
+            clear()
+
     return user_data
 
 
